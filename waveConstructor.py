@@ -246,6 +246,10 @@ def parse(tokens):
                 w2 = getWave(arg2)
 
                 f1 = findWaveChange(w1.wave,frame)
+
+                if f1 < 0 or f1 > frame:
+                    f1 = frame
+
                 e1 = f1
                 e2 = frame
 
