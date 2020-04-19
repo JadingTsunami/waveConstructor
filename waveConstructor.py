@@ -198,8 +198,15 @@ def parse(tokens):
 
         if isEquality(op):
             # assignment
-            w1 = getWave(arg1)
             v = str(arg2)
+
+            if arg1 == "all" and isValidWaveSymbol(v):
+                for w in waves:
+                    if w.name:
+                        w.addToWave(frame,v)
+                return
+
+            w1 = getWave(arg1)
 
             if isValidWaveSymbol(v):
                 # shouldn't hit this since you'd have to

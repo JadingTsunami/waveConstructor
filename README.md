@@ -57,6 +57,12 @@ Assign a value to a wave for a given frame using the syntax:
 name = value
 ```
 
+Use the keyword `all` to assign a value to all declared nodes at the same time. Useful for spacers like `|` or to set all waves to `0` at the start of a file.
+
+```
+all = value
+```
+
 To mark a node for use as an edge later, prefix the node letter with the letter `n`:
 
 ```
