@@ -360,7 +360,7 @@ def generateWavedrom():
     f += "\n"
 
     if edges:
-        f += ", \"edge\": ["
+        f += ", edge: ["
         first = True
         for e in edges:
             if first:
@@ -377,9 +377,18 @@ def generateWavedrom():
     return f
     
 
-def writeFile(outfile):
+def writeFile(outfile,writeData):
     with open(outfile,"w") as f:
-        f.write(generateWavedrom())
+        f.write("<html><head>\n")
+        f.write("<script src=\"http://wavedrom.com/skins/default.js\" type=\"text/javascript\"></script>\n")
+        f.write("<script src=\"http://wavedrom.com/wavedrom.min.js\" type=\"text/javascript\"></script>\n")
+        f.write("</head>\n")
+        f.write("<body onload=\"WaveDrom.ProcessAll()\">\n")
+        f.write("<script type=\"WaveDrom\">\n")
+        f.write(writeData)
+        f.write("\n</script>\n")
+        f.write("</body>\n")
+        f.write("</html>\n")
         
 
 def main():
@@ -387,7 +396,7 @@ def main():
     runParser(infile)
     finalWave = generateWavedrom()
     print str(finalWave)
-    writeFile(outfile)
+    writeFile(outfile,finalWave)
 
 
 if __name__ == "__main__":
