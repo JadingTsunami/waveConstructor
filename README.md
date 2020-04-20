@@ -33,7 +33,7 @@ wave ""
 ```
 
 
-Optionally you may supply a "short name" at the end using the format:
+Optionally you may supply a short name (not quoted) at the end using the format:
 
 ```
 wave "A Long Name" as short_name
@@ -41,7 +41,22 @@ wave "A Long Name" as short_name
 
 The long name will appear in the text output, allowing you to give more descriptive names with otherwise-unusable characters in the name.
 
-Refer to the wave using the short name.
+Refer to the wave for assignments, modifiers and edges using the short name.
+
+### Groups
+
+Groups can be defined. Waves declared inside a group will become part of that group.
+
+End a group using the `end` keyword.
+
+```
+group "Group Name"
+wave wave1
+wave wave2
+...
+end
+```
+
 
 ## Clocks
 
@@ -144,5 +159,4 @@ wave1 : phase 0.5
 
 * Header/footer
 * Formatting
-* Groups
 
