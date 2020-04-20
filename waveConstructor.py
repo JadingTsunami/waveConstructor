@@ -18,6 +18,7 @@ import sys
 import string
 
 groups = []
+group_ends = []
 
 # each wave must have:
 #  name
@@ -66,7 +67,6 @@ edges = []
 unbuilt_edges = []
 # list of which edges are not used already
 unused_node_markers = list(string.ascii_letters)
-in_group = False
 frame = 0
 
 def parseArgs(args):
@@ -174,13 +174,10 @@ def parse(tokens):
             if keyword[i] == '.':
                 nextFrame()
 
-    # TODO: groups not implemented yet
     elif keyword == 'group':
-        groups.append( tokens[1] )
-        in_group = True
+        groups.append( (tokens[1],len(waves)) )
     elif keyword == 'end':
-        in_group = False
-    # TODO: end groups
+        group_ends.append(len(waves))
     elif keyword == 'wave':
         newWave = getWave(tokens[-1])
         if len(tokens) > 2:
@@ -351,14 +348,33 @@ def generateWavedrom():
     f = "{signal: [\n"
 
     # build waves
-    first = True
+    wave_count = 0
+    first_group = True
     for w in waves:
-        if first:
-            first = False
-        else:
+        
+        # group opens
+        while len(groups) > 0 and groups[0][1] == wave_count:
+            if first_group:
+                first_group = False
+            else:
+                f += ","
+
+            g = groups.pop(0)
+            f += "[\'"
+            f += str(g[0])
+            f += "\',\n"
+
+        if wave_count > 0:
             f += ","
             f += "\n"
         f += buildWave(w)
+        wave_count += 1
+
+        # group closes
+        while len(group_ends) > 0 and group_ends[0] == wave_count:
+            ge = group_ends.pop(0)
+            f += "]\n"
+
     
     f += "]"
     f += "\n"
