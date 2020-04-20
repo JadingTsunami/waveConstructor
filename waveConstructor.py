@@ -119,9 +119,10 @@ def isArrow(tok):
     return False
 
 def getWave(w):
-    for ww in waves:
-        if ww.name == w:
-            return ww
+    if w:
+        for ww in waves:
+            if ww.name == w:
+                return ww
 
     w1 = Wave()
     w1.name = w
@@ -350,21 +351,25 @@ def generateWavedrom():
     # build waves
     wave_count = 0
     first_group = True
+    first_wave = True
     for w in waves:
         
         # group opens
         while len(groups) > 0 and groups[0][1] == wave_count:
+            first_wave = True
             if first_group:
                 first_group = False
             else:
                 f += ","
 
             g = groups.pop(0)
-            f += "[\'"
+            f += "\n[\'"
             f += str(g[0])
             f += "\',\n"
 
-        if wave_count > 0:
+        if first_wave:
+            first_wave = False
+        else:
             f += ","
             f += "\n"
         f += buildWave(w)
@@ -373,7 +378,7 @@ def generateWavedrom():
         # group closes
         while len(group_ends) > 0 and group_ends[0] == wave_count:
             ge = group_ends.pop(0)
-            f += "]\n"
+            f += "\n]\n"
 
     
     f += "]"
