@@ -110,6 +110,10 @@ a ~> b : Label text
 
 Supply two wave names separated by a valid edge arrow to create an edge with automatic node marker assignment.
 
+Edge nodes will be automatically assigned connecting the most recent change in the first wave with the current frame of the second wave.
+
+This is useful for creating dependency arrows for changes happening in the current frame.
+
 Example:
 
 ```
