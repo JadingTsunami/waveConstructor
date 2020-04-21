@@ -318,7 +318,12 @@ def buildWave(w):
     if w.data:
         s += ", "
         s += "data: ["
+        first_data = True
         for d in w.data:
+            if first_data:
+                first_data = False
+            else:
+                s += ','
             s += '\'%s\'' % str(d)
         s += "]"
         
