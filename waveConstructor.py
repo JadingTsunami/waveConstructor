@@ -49,6 +49,11 @@ class Wave:
         return self.name
 
     def addToWave(self,frame,value):
+        # remove any updates that match the given
+        # frame. Only 1 update per frame is allowed.
+        for w in self.wave:
+            if len(w) > 0 and w[0] == frame:
+                self.wave.remove(w)
         self.wave.append( ( frame, value ) )
 
     def addData(self,d):
