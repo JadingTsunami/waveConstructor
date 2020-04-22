@@ -166,6 +166,9 @@ def getNodeMarker(wave,frame):
 def isValidWaveSymbol(v):
     return v in "01.zx=ud23456789|pPnNlLHh"
 
+def isDataWaveSymbol(v):
+    return v in "23456789"
+
 def parse(tokens):
     # will eventually refactor this
     # skip blanks and comments
@@ -226,6 +229,8 @@ def parse(tokens):
             
             if arg3:
                 w1.addData(arg3)
+            elif isDataWaveSymbol(v):
+                w1.addData("")
                 
 
         elif isArrow(op):
