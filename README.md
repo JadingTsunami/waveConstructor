@@ -51,8 +51,8 @@ End a group using the `end` keyword.
 
 ```
 group "Group Name"
-wave wave1
-wave wave2
+wave "wave1"
+wave "wave2"
 ...
 end
 ```
