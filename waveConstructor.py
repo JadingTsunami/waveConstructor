@@ -225,7 +225,9 @@ def parse(tokens):
                 if v[1] in unused_node_markers:
                     unused_node_markers.remove(v[1])
             else:
-                assert False, "Invalid assignment: %s" % str(tokens)
+                # assume it's data, and assign it accordingly
+                w1.addToWave(frame,'2')
+                w1.addData(v)
             
             if arg3:
                 w1.addData(arg3)
@@ -288,7 +290,7 @@ def runParser(infile):
     f.close()
 
 def buildRunner(name,runner,firstChar='x'):
-    s = str(name) + ": \'"
+    s = str(name) + ": \""
     c = runner.pop(0)
     for i in range(frame+1):
         # assumes wave nodes are frames in order
@@ -302,40 +304,40 @@ def buildRunner(name,runner,firstChar='x'):
             s += firstChar
         else:
             s += '.'
-    s += "\'"
+    s += "\""
     return s
 
 def buildWave(w):
     s = "{"
 
     if w.name:
-        s += "name: \'%s\'" % w.getName()
+        s += "\"name\": \"%s\"" % w.getName()
 
     if w.wave:
         s += ", "
-        s += buildRunner("wave",w.wave)
+        s += buildRunner("\"wave\"",w.wave)
 
     if w.node:
         s += ", "
-        s += buildRunner("node",w.node,'.')
+        s += buildRunner("\"node\"",w.node,'.')
 
 
     if w.data:
         s += ", "
-        s += "data: ["
+        s += "\"data\": ["
         first_data = True
         for d in w.data:
             if first_data:
                 first_data = False
             else:
                 s += ','
-            s += '\'%s\'' % str(d)
+            s += '\"%s\"' % str(d)
         s += "]"
         
     if w.modifiers:
         for m in w.modifiers.keys():
             s += ", "
-            s += str(m) + ": " + str(w.modifiers[m])
+            s += "\"" + str(m) + "\": " + str(w.modifiers[m])
     s += "}"
     return s
         
@@ -361,7 +363,7 @@ def generateWavedrom():
         edges.append(newEdge)
 
     # preamble
-    f = "{signal: [\n"
+    f = "{\"signal\": [\n"
 
     # build waves
     wave_count = 0
@@ -378,9 +380,9 @@ def generateWavedrom():
                 f += ","
 
             g = groups.pop(0)
-            f += "\n[\'"
+            f += "\n[\""
             f += str(g[0])
-            f += "\',\n"
+            f += "\",\n"
 
         if first_wave:
             first_wave = False
@@ -400,16 +402,16 @@ def generateWavedrom():
     f += "\n"
 
     if edges:
-        f += ", edge: ["
+        f += ", \"edge\": ["
         first = True
         for e in edges:
             if first:
                 first = False
             else:
                 f += ','
-            f += '\''
+            f += '\"'
             f += str(e)
-            f += '\''
+            f += '\"'
         f +="]"
 
     # postamble
