@@ -1,0 +1,14 @@
+# Starts with comment
+wave "['tspan', {'fill':'purple'},'big, heavy wave']" as wave1
+wave "wave2"
+
+all = x
+.
+wave1 = 1
+.
+wave2 = 1
+wave1 ~> wave2
+.
+#wave3 = 2 : ['tspan', {'class':'h3'},'big, heavy data this time']
+.........
+# dot at end

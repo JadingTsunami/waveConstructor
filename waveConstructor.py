@@ -213,7 +213,7 @@ class waveConstructor:
         s = "{"
 
         if w.name:
-            s += "\"name\": \"%s\"" % w.getName()
+            s += "\"name\": %s" % formatSpanString(w.getName())
 
         if w.wave:
             s += ", "
@@ -233,7 +233,7 @@ class waveConstructor:
                     first_data = False
                 else:
                     s += ','
-                s += '\"%s\"' % str(d)
+                s += formatSpanString(d)
             s += "]"
 
         if w.modifiers:
@@ -428,6 +428,14 @@ def isValidWaveSymbol(v):
 def isDataWaveSymbol(v):
     return v in "23456789"
 
+def formatSpanString(s):
+    s = s.strip()
+    print "formatting " + str(s)
+    if not (s.startswith('[') and s.endswith(']')):
+        return "\"" + s + "\""
+    else:
+        return s.replace("\'","\"")
+        
 
 def writeFile(outfile,writeData):
     with open(outfile,"w") as f:
