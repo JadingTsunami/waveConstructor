@@ -12,13 +12,8 @@ for i in *[^.html]; do
     else
         ((passcount++))
         echo "PASS"
+        # automatically remove passing outputs
+        rm $i.html
     fi
 done
 echo "Passed $passcount, failed $failcount, total $((passcount+failcount))"
-read -p "Clean outputs? [yN]" -t 2 choice
-if [[ -n "$choice" && "$choice" =~ [yY] ]]; then
-    for i in *[^.html]; do
-        rm $i.html
-        echo "Removed $i.html"
-    done
-fi
