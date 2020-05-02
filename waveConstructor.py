@@ -243,7 +243,12 @@ class waveConstructor:
         s += "}"
         return s
 
-    def generateWavedrom(self):
+    def generateWavedrom(self,inputSource,isFile=False):
+        self.runParser(inputSource,isFile)
+        return self.generateWaveJSON()
+
+
+    def generateWaveJSON(self):
         assert self.parser_done, "Error: Run parser before generating waveform."
 
         # build edges, if necessary
@@ -454,8 +459,7 @@ def main():
     import sys
     (infile,outfile) = parseArgs(sys.argv)
     wc = waveConstructor()
-    wc.runParser(infile, isFile=True)
-    finalWave = wc.generateWavedrom()
+    finalWave = wc.generateWavedrom(infile,isFile=True)
     print str(finalWave)
     writeFile(outfile,finalWave)
 
