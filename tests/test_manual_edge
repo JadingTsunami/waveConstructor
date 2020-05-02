@@ -1,0 +1,12 @@
+wave "w1"
+wave "w2"
+
+all = 0
+.
+w1 = 1
+w1 = nx
+.
+w2 = 1
+w2 = ny
+x ~> y : edge assignment
+..
