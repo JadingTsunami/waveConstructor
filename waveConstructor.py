@@ -100,6 +100,9 @@ def tokenize(line):
             finalSplit.append(colonSplit[1])
             return finalSplit
     
+    elif len(wordsplit) > 2 and wordsplit[1] == "=":
+        eqSplit = [ x.strip() for x in line.split("=") ]
+        return [eqSplit[0],"=",eqSplit[1]]
     return line.split()
 
 def nextFrame():

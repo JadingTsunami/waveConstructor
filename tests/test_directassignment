@@ -1,0 +1,3 @@
+wave "Data with Direct" as dwd
+
+dwd = Direct assignment of data
