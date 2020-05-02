@@ -1,0 +1,64 @@
+group "Outer Group"
+    wave "wave1"
+    group "Inner Group"
+        wave "Wave with Spaces" as wavespace
+    end
+    wave ""
+    end
+    wave ""
+group "Standalone Group"
+    wave "wave2"
+    wave "wave2a"
+    wave "wave3"
+    wave "wave4"
+end
+wave "Longer Name for Fifth" as wave5
+wave "wave6"
+wave "wave7"
+wave "wave8"
+wave "wave9"
+wave "wave10"
+wave "wave11"
+wave "wave12"
+wave "wave13"
+wave "wave14"
+wave "wave15"
+
+
+# blanks are spacers
+wave ""
+
+all = 0
+.
+wave1 : phase 0.5
+wave1 = 0
+wave2 = 0
+wave1 = nc
+.
+wave1 = na
+wave1 = 1
+wave2 = nd
+wave14 = 2 : fill data
+wave5 = p
+.
+wave2 = 1
+wave1 -|> wave2
+wave2 = nb
+wave10 = 3 : other data
+wave3 = z
+wavespace = P
+wavespace : period 2
+.
+all = |
+.
+wave4 = 4 : Filled
+wave2 -> wave3 : Manual edge
+..
+wave8 = 3
+wave5 -> wave8 : Automatic edge
+.
+wave5 = z
+.
+a ~> b : Arrows
+c ~> d
+

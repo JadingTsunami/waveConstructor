@@ -1,0 +1,12 @@
+# Starts with comment
+wave "wave1"
+wave "wave2"
+
+all = 0
+.
+wave1 = 1
+.
+wave2 = 1
+wave1 ~> wave2
+.
+# dot at end
