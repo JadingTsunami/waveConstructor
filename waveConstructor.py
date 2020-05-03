@@ -67,7 +67,7 @@ class waveConstructor:
     def parse(self, tokens):
         # will eventually refactor this
         # skip blanks and comments
-        if len(tokens) == 0 or tokens[0] == "#":
+        if len(tokens) == 0 or tokens[0][0] == "#":
             return
 
         # identify the keyword token
