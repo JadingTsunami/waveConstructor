@@ -407,7 +407,7 @@ def findWaveChange(wave,endFrame):
     for c in wave:
         if c[0] > endFrame:
             return loc
-        else:
+        elif c[1] != '|':
             loc = c[0]
     return loc
 

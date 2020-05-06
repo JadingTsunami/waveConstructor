@@ -1,0 +1,12 @@
+wave "wave1"
+wave "wave2"
+
+wave1 = 1
+wave2 = 0
+.
+all = |
+.
+wave2 = 1
+wave1 ~> wave2
+.
+
