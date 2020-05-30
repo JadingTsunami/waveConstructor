@@ -35,6 +35,9 @@ class waveConstructor:
         self.frame = 0
         self.parser_done = False
 
+    def reset(self):
+        self.__init__()
+
     def nextFrame(self):
         self.frame += 1
 
@@ -244,6 +247,7 @@ class waveConstructor:
         return s
 
     def generateWavedrom(self,inputSource,isFile=False):
+        self.reset()
         self.runParser(inputSource,isFile)
         return self.generateWaveJSON()
 
@@ -435,7 +439,6 @@ def isDataWaveSymbol(v):
 
 def formatSpanString(s):
     s = s.strip()
-    print "formatting " + str(s)
     if not (s.startswith('[') and s.endswith(']')):
         return "\"" + s + "\""
     else:
