@@ -41,6 +41,8 @@ wave "A Long Name" as short_name
 
 The long name will appear in the text output, allowing you to give more descriptive names with otherwise-unusable characters in the name.
 
+Short name must be at least 3 characters to avoid conflicts with Manual edge nodes.
+
 Refer to the wave for assignments, modifiers and edges using the short name.
 
 ### Groups

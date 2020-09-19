@@ -396,8 +396,8 @@ class Wave:
 
 def parseArgs(args):
     if len(args) != 3:
-        print "Usage: " + args[0] + " <infile> <outfile>"
-        return (-1,-1)
+        print("Usage: " + args[0] + " <infile> <outfile>")
+        return (None,None)
 
     return (str(args[1]),str(args[2]))
 
@@ -461,9 +461,11 @@ def writeFile(outfile,writeData):
 def main():
     import sys
     (infile,outfile) = parseArgs(sys.argv)
+    if not infile or not outfile:
+        return
     wc = waveConstructor()
     finalWave = wc.generateWavedrom(infile,isFile=True)
-    print str(finalWave)
+    print(str(finalWave))
     writeFile(outfile,finalWave)
 
 
